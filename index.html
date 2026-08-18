@@ -543,7 +543,7 @@ function render(){
       const id = e.target.dataset.id;
       progress[id] = e.target.checked;
       trackOpenState();
-      await saveProgress();
+      saveProgress();
       render();
       restoreOpenState(openDays);
       updateOverall();
@@ -595,39 +595,37 @@ function showStorageWarning(show){
   else el.classList.remove('show');
 }
 
-// Explicit self-test: writes and reads back a canary value so we know for
-// certain whether storage works, instead of silently assuming failures
-// just mean "no data yet".
-async function verifyStorageWorks(){
+// This file is meant to be opened standalone / hosted externally (e.g.
+// GitHub Pages), not rendered inside Claude.ai — so it uses the browser's
+// own localStorage rather than Claude's window.storage API (which only
+// exists inside a Claude.ai artifact iframe and would otherwise make
+// this warning fire permanently on any external host).
+function verifyStorageWorks(){
   const canaryKey = STORAGE_KEY + '-canary';
   const canaryVal = String(Date.now());
   try{
-    await window.storage.set(canaryKey, canaryVal, false);
-    const readBack = await window.storage.get(canaryKey, false);
-    return !!(readBack && readBack.value === canaryVal);
+    localStorage.setItem(canaryKey, canaryVal);
+    const readBack = localStorage.getItem(canaryKey);
+    localStorage.removeItem(canaryKey);
+    return readBack === canaryVal;
   }catch(err){
     return false;
   }
 }
 
-async function loadProgress(){
+function loadProgress(){
   try{
-    const result = await window.storage.get(STORAGE_KEY, false);
-    progress = (result && result.value) ? JSON.parse(result.value) : {};
+    const raw = localStorage.getItem(STORAGE_KEY);
+    progress = raw ? JSON.parse(raw) : {};
   }catch(err){
-    // A missing key throws too (per storage API docs), so this is the
-    // normal path on first use — not necessarily a failure.
     progress = {};
   }
 }
 
-async function saveProgress(){
+function saveProgress(){
   try{
-    const result = await window.storage.set(STORAGE_KEY, JSON.stringify(progress), false);
-    if(!result){
-      storageOk = false;
-      showStorageWarning(true);
-    } else if(!storageOk){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    if(!storageOk){
       storageOk = true;
       showStorageWarning(false);
     }
@@ -638,18 +636,18 @@ async function saveProgress(){
   }
 }
 
-document.getElementById('resetBtn').addEventListener('click', async ()=>{
+document.getElementById('resetBtn').addEventListener('click', ()=>{
   if(!confirm('Сигурно желиш да ресетујеш сав унети напредак?')) return;
   progress = {};
-  await saveProgress();
+  saveProgress();
   render();
   updateOverall();
 });
 
-(async function init(){
+(function init(){
   buildIndex();
-  await loadProgress();
-  const worksNow = await verifyStorageWorks();
+  loadProgress();
+  const worksNow = verifyStorageWorks();
   storageOk = worksNow;
   showStorageWarning(!worksNow);
   render();
