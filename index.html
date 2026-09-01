@@ -122,6 +122,38 @@
   .examcheck-block label.item input:checked ~ span.txt{color:var(--muted);}
 
   .loading{text-align:center;color:var(--muted);padding:30px;font-size:0.85rem;}
+
+  .planned-min{color:var(--muted);font-weight:400;}
+  .actual-row{
+    display:flex;align-items:center;gap:7px;margin:2px 0 6px 30px;font-size:11px;color:var(--muted);flex-wrap:wrap;
+  }
+  .actual-row input[type="number"]{
+    background:#1c1f26;border:1px solid var(--card-border);color:var(--text);border-radius:6px;
+    padding:3px 6px;font-size:11px;width:56px;font-family:inherit;
+  }
+  .actual-row input[type="number"]:focus{outline:none;border-color:var(--accent);}
+  .diff-badge{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap;}
+  .diff-badge.late{background:rgba(229,72,77,0.14);color:var(--red);}
+  .diff-badge.early{background:rgba(62,207,142,0.14);color:var(--green);}
+  .diff-badge.ontime{background:rgba(79,163,247,0.14);color:var(--blue);}
+  .roast{font-size:10.5px;font-style:italic;white-space:normal;}
+  .roast.late{color:var(--red);}
+  .roast.early{color:var(--green);}
+  .roast.ontime{color:var(--blue);}
+
+  .comment-row{margin:0 0 10px 30px;}
+  .comment-input{
+    width:100%;max-width:440px;background:#1c1f26;border:1px solid var(--card-border);color:var(--text);
+    border-radius:8px;padding:6px 9px;font-size:11.5px;font-family:inherit;resize:vertical;min-height:30px;
+    box-sizing:border-box;
+  }
+  .comment-input:focus{outline:none;border-color:var(--accent);}
+  .comment-reply{margin-top:4px;font-size:11.5px;font-style:italic;color:var(--accent);}
+
+  .subject-drift-line{font-size:0.72rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px dashed var(--card-border);}
+  .late{color:var(--red);font-weight:700;}
+  .early{color:var(--green);font-weight:700;}
+  .ontime{color:var(--blue);font-weight:700;}
 </style>
 </head>
 <body>
@@ -163,6 +195,45 @@ const SUBJECTS = {
   eng: {label:"Engleski jezik 2", cls:"eng", color:"var(--blue)"},
   spi: {label:"Savremena politička istorija", cls:"spi", color:"var(--purple)"}
 };
+
+const itemLateComments = ["Alo, ovo kasni više nego što bi trebalo.", "Bre, sat otkucava brže nego što ti okrećeš stranice.", "Ajde, da nisi zaspala nad skriptom.", "Slušaj, manje zurenja, više učenja.", "Realno, vreme ti curi kao voda kroz prste.", "Ma daj, ovo kasni više nego tvoja motivacija jutros.", "Pazi, fokus ti je otišao na pauzu bez tebe.", "Iskreno, ovo pitanje te je savladalo, ne obrnuto."];
+const itemOnTimeComments = ["Ovako se to radi, nastavi u tom ritmu.", "Tačno na vreme, bravo.", "Dobro, drži tempo do kraja.", "Solidno, upravo kako treba.", "Fino, ni brzo ni sporo.", "Odlično, disciplina se isplati.", "Bravo, poštuješ raspored."];
+const itemEarlyComments = ["Brzo si to sredila — jesi li stvarno naučila ili samo prelistala.", "Hitro, samo proveri da ti je ostalo u glavi.", "Munjevito, nadam se da nije bilo brzinsko čitanje.", "Turbo, ne žrtvuj razumevanje zarad tempa.", "Rekordno, ali nemoj da se hvališ ako ne znaš detalje."];
+const commentReplies = ["Aha, primljeno k znanju, sad glavu u tekst.", "Zvuči uverljivo, sad nazad na učenje.", "Zapisano, hajde dalje.", "Razumem, ali gradivo se samo ne uči.", "Ok, sad ozbiljno, dalje.", "Jasno, diši i vrati se tekstu."];
+
+function hashStr(s){
+  let h = 0;
+  for(let i=0;i<s.length;i++){ h = (h*31 + s.charCodeAt(i)) | 0; }
+  return Math.abs(h);
+}
+function pickComment(arrv, seed){
+  if(!arrv || !arrv.length) return '';
+  return arrv[hashStr(String(seed)) % arrv.length];
+}
+// Deterministička procena planiranog vremena za temu (nema ručno unetih minuta u DAYS,
+// pa se planirano vreme računa iz teksta teme — isti tekst uvek daje isti broj).
+function estimateMinutes(text, factor){
+  factor = factor || 1;
+  const words = text.split(/\s+/).length;
+  const base = 14 + (hashStr(text) % 18) + Math.round(words*0.9);
+  return Math.round(Math.max(15, Math.min(45, base)) * factor);
+}
+function diffInfo(planned, actualVal){
+  if(actualVal === undefined || actualVal === null || actualVal === '') return null;
+  const diff = actualVal - planned;
+  if(diff === 0) return {text:"tačno", cls:"ontime", diff:0};
+  if(diff > 0) return {text:`+${diff} min`, cls:"late", diff};
+  return {text:`${diff} min`, cls:"early", diff};
+}
+function itemComment(cls, seed){
+  const map = {late:itemLateComments, ontime:itemOnTimeComments, early:itemEarlyComments};
+  return pickComment(map[cls], seed);
+}
+// Engleski: fiksno 10 min po temi (ukupno pola sata za 3 teme dnevno), bez obzira na dužinu teksta.
+function getPlanned(subj, text, factor){
+  if(subj === 'eng') return 10;
+  return estimateMinutes(text, factor);
+}
 
 // Each day: {date, examFlag, note, afterNotes: [...], groups: [{subj, groupNote, items: [...]}], review: {subj, label}}
 const DAYS = [
@@ -546,7 +617,9 @@ const DAYS = [
 ];
 
 let progress = {};
-let itemIndex = []; // {id, subj}
+let actualMin = {};
+let itemComments = {};
+let itemIndex = []; // {id, subj, text, planned}
 let storageOk = true;
 let openDays = new Set();
 
@@ -554,16 +627,16 @@ function buildIndex(){
   DAYS.forEach((day, di)=>{
     if(day.groups){
       day.groups.forEach((g, gi)=>{
-        g.items.forEach((_, ii)=>{
-          itemIndex.push({id:`d${di}-g${gi}-i${ii}`, subj:g.subj});
+        g.items.forEach((text, ii)=>{
+          itemIndex.push({id:`d${di}-g${gi}-i${ii}`, subj:g.subj, text, planned:getPlanned(g.subj, text)});
         });
       });
     }
     if(day.review){
-      itemIndex.push({id:`d${di}-review`, subj:day.review.subj});
+      itemIndex.push({id:`d${di}-review`, subj:day.review.subj, text:day.review.label, planned:estimateMinutes(day.review.label, 6)});
     }
     if(day.examCheck){
-      itemIndex.push({id:`d${di}-examcheck`, subj:null});
+      itemIndex.push({id:`d${di}-examcheck`, subj:null, text:day.examCheck, planned:null});
     }
   });
 }
@@ -632,10 +705,30 @@ function render(){
         grp.innerHTML = `<div class="group-title ${s.cls}">${s.label}${g.groupNote ? ` <span class="group-note">(${g.groupNote})</span>`:''} <span class="group-count">(${checkedInGroup}/${g.items.length})</span></div>`;
         g.items.forEach((text, ii)=>{
           const id = `d${di}-g${gi}-i${ii}`;
+          const planned = getPlanned(g.subj, text);
           const lab = document.createElement('label');
           lab.className = 'item';
-          lab.innerHTML = `<input type="checkbox" data-id="${id}" ${progress[id]?'checked':''}/><span class="txt">${text}</span>`;
+          lab.innerHTML = `<input type="checkbox" data-id="${id}" ${progress[id]?'checked':''}/><span class="txt">${text} <span class="planned-min">(~${planned} min)</span></span>`;
           grp.appendChild(lab);
+
+          const info = diffInfo(planned, actualMin[id]);
+          const cmt = info ? itemComment(info.cls, id+':'+actualMin[id]) : '';
+          const actualRow = document.createElement('div');
+          actualRow.className = 'actual-row';
+          actualRow.innerHTML = `
+            <span>Potrošeno vremena:</span>
+            <input type="number" min="0" placeholder="min" data-actual-id="${id}" value="${actualMin[id] !== undefined ? actualMin[id] : ''}">
+            ${info ? `<span class="diff-badge ${info.cls}">${info.text}</span><span class="roast ${info.cls}">${cmt}</span>` : ''}
+          `;
+          grp.appendChild(actualRow);
+
+          const commentRow = document.createElement('div');
+          commentRow.className = 'comment-row';
+          commentRow.innerHTML = `
+            <textarea class="comment-input" placeholder="komentar (opciono)" data-comment-id="${id}">${itemComments[id] || ''}</textarea>
+            ${itemComments[id] ? `<div class="comment-reply">${pickComment(commentReplies, id+':'+itemComments[id])}</div>` : ''}
+          `;
+          grp.appendChild(commentRow);
         });
         body.appendChild(grp);
         if(g.doneNote){
@@ -650,9 +743,30 @@ function render(){
     if(day.review){
       const id = `d${di}-review`;
       const s = SUBJECTS[day.review.subj];
+      const planned = estimateMinutes(day.review.label, 6);
       const rb = document.createElement('div');
       rb.className = 'review-block';
-      rb.innerHTML = `<label class="item"><input type="checkbox" data-id="${id}" ${progress[id]?'checked':''}/><span class="txt" style="color:${s.color}">${day.review.label}</span></label>`;
+      rb.innerHTML = `<label class="item"><input type="checkbox" data-id="${id}" ${progress[id]?'checked':''}/><span class="txt" style="color:${s.color}">${day.review.label} <span class="planned-min">(~${planned} min)</span></span></label>`;
+
+      const info = diffInfo(planned, actualMin[id]);
+      const cmt = info ? itemComment(info.cls, id+':'+actualMin[id]) : '';
+      const actualRow = document.createElement('div');
+      actualRow.className = 'actual-row';
+      actualRow.innerHTML = `
+        <span>Potrošeno vremena:</span>
+        <input type="number" min="0" placeholder="min" data-actual-id="${id}" value="${actualMin[id] !== undefined ? actualMin[id] : ''}">
+        ${info ? `<span class="diff-badge ${info.cls}">${info.text}</span><span class="roast ${info.cls}">${cmt}</span>` : ''}
+      `;
+      rb.appendChild(actualRow);
+
+      const commentRow = document.createElement('div');
+      commentRow.className = 'comment-row';
+      commentRow.innerHTML = `
+        <textarea class="comment-input" placeholder="komentar (opciono)" data-comment-id="${id}">${itemComments[id] || ''}</textarea>
+        ${itemComments[id] ? `<div class="comment-reply">${pickComment(commentReplies, id+':'+itemComments[id])}</div>` : ''}
+      `;
+      rb.appendChild(commentRow);
+
       body.appendChild(rb);
     }
 
@@ -665,6 +779,38 @@ function render(){
     cb.addEventListener('change', async (e)=>{
       const id = e.target.dataset.id;
       progress[id] = e.target.checked;
+      trackOpenState();
+      saveProgress();
+      render();
+      restoreOpenState(openDays);
+      updateOverall();
+    });
+  });
+
+  container.querySelectorAll('input[data-actual-id]').forEach(inp=>{
+    inp.addEventListener('click', e=>e.stopPropagation());
+    inp.addEventListener('change', (e)=>{
+      e.stopPropagation();
+      const id = e.target.dataset.actualId;
+      const v = e.target.value;
+      if(v !== '' && v !== null) actualMin[id] = parseInt(v,10);
+      else delete actualMin[id];
+      trackOpenState();
+      saveProgress();
+      render();
+      restoreOpenState(openDays);
+      updateOverall();
+    });
+  });
+
+  container.querySelectorAll('textarea[data-comment-id]').forEach(ta=>{
+    ta.addEventListener('click', e=>e.stopPropagation());
+    ta.addEventListener('change', (e)=>{
+      e.stopPropagation();
+      const id = e.target.dataset.commentId;
+      const v = e.target.value;
+      if(v && v.trim() !== '') itemComments[id] = v;
+      else delete itemComments[id];
       trackOpenState();
       saveProgress();
       render();
@@ -701,15 +847,48 @@ function updateOverall(){
 
   const mini = document.getElementById('subjectMini');
   mini.innerHTML = '';
+  let grandDrift = 0, grandCount = 0;
   Object.keys(SUBJECTS).forEach(key=>{
     const s = SUBJECTS[key];
-    const subTotal = itemIndex.filter(it=>it.subj===key).length;
-    if(subTotal === 0) return;
-    const subChecked = itemIndex.filter(it=>it.subj===key && progress[it.id]).length;
+    const items = itemIndex.filter(it=>it.subj===key);
+    if(items.length === 0) return;
+    const subChecked = items.filter(it=>progress[it.id]).length;
+
+    let drift = 0, dcount = 0;
+    items.forEach(it=>{
+      if(it.planned !== null && actualMin[it.id] !== undefined){
+        drift += actualMin[it.id] - it.planned;
+        dcount++;
+      }
+    });
+    grandDrift += drift; grandCount += dcount;
+
+    let driftTxt = '';
+    if(dcount > 0){
+      const cls = drift === 0 ? 'ontime' : (drift > 0 ? 'late' : 'early');
+      const label = drift === 0 ? 'tačno' : (drift > 0 ? `+${drift} min` : `${drift} min`);
+      driftTxt = ` · <span class="${cls}">${label}</span>`;
+    }
+
     const span = document.createElement('span');
-    span.innerHTML = `<span class="dot" style="background:${s.color}"></span>${s.label}: ${subChecked}/${subTotal}`;
+    span.innerHTML = `<span class="dot" style="background:${s.color}"></span>${s.label}: ${subChecked}/${items.length}${driftTxt}`;
     mini.appendChild(span);
   });
+
+  let driftLine = document.getElementById('overallDriftLine');
+  if(!driftLine){
+    driftLine = document.createElement('div');
+    driftLine.id = 'overallDriftLine';
+    driftLine.className = 'subject-drift-line';
+    document.querySelector('.overall').appendChild(driftLine);
+  }
+  if(grandCount > 0){
+    const cls = grandDrift === 0 ? 'ontime' : (grandDrift > 0 ? 'late' : 'early');
+    const label = grandDrift === 0 ? 'tačno po planu' : (grandDrift > 0 ? `u minusu ${grandDrift} min` : `u plusu ${-grandDrift} min`);
+    driftLine.innerHTML = `Ukupno odstupanje od plana (${grandCount} uneto): <span class="${cls}">${label}</span>`;
+  } else {
+    driftLine.innerHTML = '';
+  }
 }
 
 function showStorageWarning(show){
@@ -739,15 +918,27 @@ function verifyStorageWorks(){
 function loadProgress(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
-    progress = raw ? JSON.parse(raw) : {};
+    const data = raw ? JSON.parse(raw) : {};
+    if(data && (data.progress || data.actualMin || data.itemComments)){
+      progress = data.progress || {};
+      actualMin = data.actualMin || {};
+      itemComments = data.itemComments || {};
+    } else {
+      // stari format (samo checkbox-ovi, pre uvođenja praćenja vremena)
+      progress = data || {};
+      actualMin = {};
+      itemComments = {};
+    }
   }catch(err){
     progress = {};
+    actualMin = {};
+    itemComments = {};
   }
 }
 
 function saveProgress(){
   try{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({progress, actualMin, itemComments}));
     if(!storageOk){
       storageOk = true;
       showStorageWarning(false);
