@@ -16,6 +16,7 @@
     --blue:#4fa3f7;
     --green:#3ecf8e;
     --accent:#6e9bff;
+    --purple:#c084fc;
     --warn-bg:#3a1418;
     --warn-text:#ff8a8f;
   }
@@ -44,6 +45,8 @@
     border-radius:12px;padding:14px 16px;margin-bottom:8px;font-size:0.88rem;
   }
   .exams b{color:var(--accent);}
+  .exams .cat-title{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin-top:6px;}
+  .exams .cat-title:first-child{margin-top:0;}
   .fix-note{
     font-size:0.72rem;color:var(--muted);margin-bottom:18px;font-style:italic;
   }
@@ -94,6 +97,7 @@
   .group-title.ibo{color:var(--orange);}
   .group-title.spt{color:var(--yellow);}
   .group-title.eng{color:var(--blue);}
+  .group-title.spi{color:var(--purple);}
   .group-count{color:var(--muted);font-weight:500;font-size:0.72rem;}
   .group-note{color:var(--muted);font-weight:500;font-size:0.7rem;text-transform:none;}
 
@@ -129,12 +133,14 @@
   <div class="storage-warning" id="storageWarning">⚠️ Чување напретка тренутно не ради — оно што штиклираш можда неће остати сачувано. Не ослањај се на ово док се порука не сакрије.</div>
 
   <div class="exams">
-    <div><b>14. септембар</b> — Енглески језик 2</div>
+    <div class="cat-title">Колоквијуми</div>
+    <div><b>14. септембар</b> — Енглески језик 2 колоквијум</div>
+    <div class="cat-title">Испити</div>
+    <div><b>16. септембар</b> — Савремена политичка историја</div>
     <div><b>19. септембар</b> — Економски систем Србије</div>
     <div><b>21. септембар</b> — Историја балканских односа</div>
     <div><b>26. септембар</b> — Савремена политичка теорија</div>
   </div>
-  <div class="fix-note">* Напомена: у оригиналном документу наслов друге секције погрешно каже "Историја балканских односа" уместо "Економски систем Србије" — овде је исправљено према садржају питања и распореду учења.</div>
 
   <div class="overall">
     <div class="overall-top">
@@ -159,7 +165,8 @@ const SUBJECTS = {
   ess: {label:"Економски систем Србије", cls:"ess", color:"var(--red)"},
   ibo: {label:"Историја балканских односа", cls:"ibo", color:"var(--orange)"},
   spt: {label:"Савремена политичка теорија", cls:"spt", color:"var(--yellow)"},
-  eng: {label:"Енглески језик 2", cls:"eng", color:"var(--blue)"}
+  eng: {label:"Енглески језик 2", cls:"eng", color:"var(--blue)"},
+  spi: {label:"Савремена политичка историја", cls:"spi", color:"var(--purple)"}
 };
 
 // Each day: {date, examFlag, note, afterNotes:[...], groups:[{subj, groupNote, items:[...]}], review:{subj, label}}
@@ -181,6 +188,13 @@ const DAYS = [
     "Слобода као аутономија",
     "Џ. С. Мил и вредност слободе",
     "Право, морал, патернализам"
+  ]},
+  {subj:"spi", items:[
+    "Prva faza Drugog svetskog rata 1939-1941",
+    "Druga faza Drugog svetskog rata 1941-1943",
+    "Treća faza Drugog svetskog rata",
+    "Pokreti otpora u Evropi",
+    "Podela Nemačke nakon Drugog svetskog rata"
   ]}
 ]},
 {date:"5. септембар", groups:[
@@ -200,6 +214,12 @@ const DAYS = [
     "Мере корисности: хедонизам благостања и нехедонистичка корисност",
     "Мере корисности: задовољење преференција и преференције засноване на потпуним информацијама",
     "Максимирање користи: У-агент и посебни односи"
+  ]},
+  {subj:"spi", items:[
+    "Stvaranje socijalističkih država u Evropi",
+    "Početak Hladnog rata",
+    "Stvaranje i delatnost Ujedinjenih nacija",
+    "Prve hladnoratovske krize — Iran, Turska i Grčka"
   ]}
 ]},
 {date:"6. септембар", groups:[
@@ -219,6 +239,13 @@ const DAYS = [
     "Аргументи у прилог максимирања користи",
     "Утилитаризам и једнакост: спољне и себичне преференције",
     "Политика утилитаризма"
+  ]},
+  {subj:"spi", items:[
+    "Trumanova doktrina i Maršalov plan",
+    "Stvaranje paktova i trka u naoružanju",
+    "Kineski građanski rat",
+    "Japan pod okupacijom",
+    "Rat u Koreji"
   ]}
 ]},
 {date:"7. септембар", groups:[
@@ -237,6 +264,12 @@ const DAYS = [
     "Ролсов аргумент једнакости могућности",
     "Ролсов аргумент друштвеног уговора",
     "Дворкинова теорија једнакости ресурса"
+  ]},
+  {subj:"spi", items:[
+    "Ajzenhauerova era",
+    "Dekolonizacija nakon Drugog svetskog rata",
+    "Nezavisnost Indije",
+    "Rat na prostoru Indokine (1945-1954)"
   ]}
 ]},
 {date:"8. септембар", groups:[
@@ -254,13 +287,21 @@ const DAYS = [
     "Политика либералне једнакости и држава благостања",
     "Нова десница и држава благостања",
     "Комунитаризам и границе правде: заједничка значења"
+  ]},
+  {subj:"spi", items:[
+    "Bliski istok i stvaranje Izraela",
+    "Sueska kriza 1956.",
+    "SSSR za vreme Nikite Hruščova",
+    "Revolucija u Mađarskoj 1956.",
+    "Nastanak Pete republike u Francuskoj"
   ]}
 ]},
 {date:"9. септембар", groups:[
   {subj:"ess", items:[
     "Транзиција и идеолошке предрасуде; економска наука и транзиција",
     "Приватизација и ефикасност - проблем односа принципала и агента",
-    "Макроекономска основа приватизације"
+    "Макроекономска основа приватизације",
+    "Међународне економске интеграције - пример CEFTA-е"
   ]},
   {subj:"ibo", items:[
     "Prvi svetski rat na Balkanu od 1916. do 1918. godine",
@@ -270,41 +311,67 @@ const DAYS = [
     "Комунитаризам: индивидуална права, опште добро, неутрална држава",
     "Политички либерализам: аутономија и толеранција",
     "Политички либерализам vs. обухватни либерализам: Ролсова ревизија",
-    "Друштвена условљеност аутономије и дужност одржања културе"
+    "Друштвена условљеност аутономије и дужност одржања културе",
+    "Модели мултикултурализма: националне мањине"
+  ]},
+  {subj:"spi", items:[
+    "Integracija Zapadne Evrope i stvaranje EEZ",
+    "Pokret nesvrstanih",
+    "Dekolonizacija Afrike",
+    "Kubanska revolucija i sukobi dve supersile"
   ]}
 ]},
 {date:"10. септембар", groups:[
   {subj:"ess", items:[
     "Модели приватизације",
     "Специфичности приватизације друштвене својине - настанак и ефикасност друштвене својине",
-    "Мешовита предузећа као приватизација друштвене својине"
+    "Мешовита предузећа као приватизација друштвене својине",
+    "Мерење нивоа развијености"
   ]},
   {subj:"ibo", items:[
     "Kraljevina SHS/Jugoslavija između dva svetska rata",
-    "Kemal Ataturk i turska država između dva svetska rata"
+    "Kemal Ataturk i turska država između dva svetska rata",
+    "Balkan u politici sila tokom Drugog svetskog rata"
   ]},
   {subj:"spt", items:[
     "Либерализам и проблем колективне делиберације изван политике",
     "Политички либерализам: заједничке вредности, солидарност, легитимитет",
     "Либерални национализам",
-    "Национализам и космополитизам"
+    "Национализам и космополитизам",
+    "Модели мултикултурализма: имигрантске групе"
+  ]},
+  {subj:"spi", items:[
+    "Sukobi na Bliskom istoku 60-ih godina",
+    "Kulturna revolucija u Kini",
+    "Detant i ograničavanje trke u naoružanju",
+    "SAD u Vijetnamu",
+    "Studentski protesti"
   ]}
 ]},
 {date:"11. септембар", groups:[
   {subj:"ess", items:[
     "Приватизација у Југославији (Србији) до 2000. године",
     "Приватизација у Србији после 2000. године",
-    "Приватизација и институционално окружење"
+    "Приватизација и институционално окружење",
+    "Динамика развоја индустрије у Србији - запосленост и инвестиције у индустрији"
   ]},
   {subj:"ibo", items:[
     "Grčka pod Venizelosom i Metaksisom",
-    "Albanija pod Ahmedom Zoguom"
+    "Albanija pod Ahmedom Zoguom",
+    "Britanija i pokreti otpora na Balkanu tokom WWII"
   ]},
   {subj:"spt", items:[
     "Врлине демократских грађана",
     "Јавна разложеност: агрегативна и делиберативна демократија",
     "Грађански републиканизам",
-    "Либерални републиканизам и инструменталне врлине"
+    "Либерални републиканизам и инструменталне врлине",
+    "Полна једнакост и полна дискриминација"
+  ]},
+  {subj:"spi", items:[
+    "Istočna politika Vilija Branta",
+    "Sukobi na Bliskom istoku 70-ih godina",
+    "Rat u Avganistanu",
+    "VB za vreme Margaret Tačer"
   ]}
 ]},
 {date:"12. септембар", groups:[
@@ -325,6 +392,13 @@ const DAYS = [
   ]},
   {subj:"eng", items:[
     "Прво читање текстова (без литературе, само текстови)"
+  ]},
+  {subj:"spi", items:[
+    "SAD za vreme Ronalda Regana",
+    "Kraj Hladnog rata",
+    "Amerika 90-ih godina",
+    "Slom socijalizma u Evropi",
+    "Zalivski rat"
   ]}
 ]},
 {date:"13. септембар", note:"🔵 САМО ЕНГЛЕСКИ ЈЕЗИК 2 — друго читање текстова. Не учи се ЕСС, ни ИБО, ни СПТ.", review:{subj:"eng", label:"Друго читање текстова (без литературе, само текстови)"}},
@@ -345,25 +419,16 @@ const DAYS = [
     "Комунитарни и либерални мултикултурализам",
     "Групно-диференцирана права",
     "Мултикултурализам и изградња нације"
+  ]},
+  {subj:"spi", items:[
+    "Daleki istok 90-ih godina",
+    "Stanje u Evropi 90-ih godina",
+    "Rusija za vreme Borisa Jeljcina",
+    "Bliski istok 90-ih godina"
   ]}
 ]},
-{date:"15. септембар", groups:[
-  {subj:"ess", items:[
-    "Међународне економске интеграције - пример CEFTA-е",
-    "Мерење нивоа развијености",
-    "Динамика развоја индустрије у Србији - запосленост и инвестиције у индустрији"
-  ]},
-  {subj:"ibo", items:[
-    "Balkan u politici sila tokom Drugog svetskog rata",
-    "Britanija i pokreti otpora na Balkanu tokom WWII"
-  ]},
-  {subj:"spt", items:[
-    "Модели мултикултурализма: националне мањине",
-    "Модели мултикултурализма: имигрантске групе",
-    "Полна једнакост и полна дискриминација"
-  ]}
-]},
-{date:"16. септембар", note:"🚨 Последњи дан новог градива из ЕСС", afterNotes:["✅ Први пролаз ЕСС завршен"], groups:[
+{date:"15. септембар", note:"🟢 САМО САВРЕМЕНА ПОЛИТИЧКА ИСТОРИЈА — целодневно понављање свих 45 питања. Не учи се ништа друго.", review:{subj:"spi", label:"Поновљено свих 45 питања"}},
+{date:"16. септембар", examFlag:"ИСПИТ — Савремена политичка историја", note:"После испита поподне — 🚨 последњи дан новог градива из ЕСС", afterNotes:["✅ Први пролаз ЕСС завршен"], groups:[
   {subj:"ess", items:[
     "Ефекти приватизације у Србији и индустрија",
     "Реструктурирање јавних предузећа",
