@@ -115,6 +115,12 @@
   }
   .review-block label.item{font-weight:600;}
 
+  .examcheck-block{
+    border:1px solid var(--red);background:#1c1215;border-radius:10px;padding:10px 12px;margin-bottom:10px;
+  }
+  .examcheck-block label.item{font-weight:700;color:var(--red);}
+  .examcheck-block label.item input:checked ~ span.txt{color:var(--muted);}
+
   .reset-row{text-align:center;margin-top:24px;}
   button.reset{
     background:none;border:1px solid var(--card-border);color:var(--muted);
@@ -171,7 +177,7 @@ const SUBJECTS = {
 
 // Each day: {date, examFlag, note, afterNotes:[...], groups:[{subj, groupNote, items:[...]}], review:{subj, label}}
 const DAYS = [
-{date:"4. септембар", groups:[
+{date:"4. септембар", note:"⏱ Издвоји пола сата за енглески.", groups:[
   {subj:"ess", items:[
     "Привредни систем - основно одређење и дефинисање",
     "Садржај и основне компоненте привредног система",
@@ -179,9 +185,9 @@ const DAYS = [
     "Вредновање успешности привредних система"
   ]},
   {subj:"ibo", items:[
-    "Sanstefanski mir i stvaranje bugarske države (1878-1908)",
-    "Velika istočna kriza i Berlinski kongres",
-    "Nastanak i razvoj hrvatskog nacionalnog pitanja u 19. veku"
+    "Санстефански мир и стварање бугарске државе (1878-1908)",
+    "Велика источна криза и Берлински конгрес",
+    "Настанак и развој хрватског националног питања у 19. веку"
   ]},
   {subj:"spt", items:[
     "Позитивна и негативна слобода",
@@ -189,15 +195,20 @@ const DAYS = [
     "Џ. С. Мил и вредност слободе",
     "Право, морал, патернализам"
   ]},
+  {subj:"eng", items:[
+    "Квантификатори: many/much, a lot of, few/a little, plenty of, enough",
+    "Квантификатори: too much/too many, both/either/neither, остали (each, every, several, quite a few...)",
+    "Reported speech: потврдне и одричне изјаве, backshift табела"
+  ]},
   {subj:"spi", items:[
-    "Prva faza Drugog svetskog rata 1939-1941",
-    "Druga faza Drugog svetskog rata 1941-1943",
-    "Treća faza Drugog svetskog rata",
-    "Pokreti otpora u Evropi",
-    "Podela Nemačke nakon Drugog svetskog rata"
+    "Прва фаза Другог светског рата 1939-1941",
+    "Друга фаза Другог светског рата 1941-1943",
+    "Трећа фаза Другог светског рата",
+    "Покрети отпора у Европи",
+    "Подела Немачке након Другог светског рата"
   ]}
 ]},
-{date:"5. септембар", groups:[
+{date:"5. септембар", note:"⏱ Издвоји пола сата за енглески.", groups:[
   {subj:"ess", items:[
     "Упоредни метод и поређење привредних система",
     "Развој привредног система Србије",
@@ -205,9 +216,9 @@ const DAYS = [
     "Мерење макроекономске активности - стопа инфлације и стопа незапослености"
   ]},
   {subj:"ibo", items:[
-    "Prizrenska liga i stvaranje albanskog nacionalnog pokreta (1878-1913)",
-    "Makedonsko pitanje u balkanskim i evropskim odnosima",
-    "Ideje o ujedinjenju južnoslovenskih naroda u 19. veku"
+    "Призренска лига и стварање албанског националног покрета (1878-1913)",
+    "Македонско питање у балканским и европским односима",
+    "Идеје о уједињењу јужнословенских народа у 19. веку"
   ]},
   {subj:"spt", items:[
     "Утилитаризам и његова привлачност",
@@ -215,24 +226,29 @@ const DAYS = [
     "Мере корисности: задовољење преференција и преференције засноване на потпуним информацијама",
     "Максимирање користи: У-агент и посебни односи"
   ]},
+  {subj:"eng", items:[
+    "Reported speech: промене времена и места, say vs tell",
+    "Reported speech: reported questions, reported commands/requests, reporting verbs",
+    "Adding emphasis (наглашавање)"
+  ]},
   {subj:"spi", items:[
-    "Stvaranje socijalističkih država u Evropi",
-    "Početak Hladnog rata",
-    "Stvaranje i delatnost Ujedinjenih nacija",
-    "Prve hladnoratovske krize — Iran, Turska i Grčka"
+    "Стварање социјалистичких држава у Европи",
+    "Почетак Хладног рата",
+    "Стварање и делатност Уједињених нација",
+    "Прве хладноратовске кризе — Иран, Турска и Грчка"
   ]}
 ]},
-{date:"6. септембар", groups:[
+{date:"6. септембар", note:"⏱ Издвоји пола сата за енглески.", groups:[
   {subj:"ess", items:[
     "Мерење макроекономске активности - каматна стопа и девизни курс",
-    "Привредни раст - значај; стабилност vs. раст",
+    "Привредни раст - значај; стабилност вс. раст",
     "Привредни развој - значај; основне компоненте; развијеност и неразвијеност",
     "Разликовање појмова развоја и раста"
   ]},
   {subj:"ibo", items:[
-    "Crna Gora u vreme Nikole Petrovića",
-    "Srbija pod vlašću poslednjih Obrenovića",
-    "Mladoturska revolucija i stvaranje turske nacije"
+    "Црна Гора у време Николе Петровића",
+    "Србија под влашћу последњих Обреновића",
+    "Младотурска револуција и стварање турске нације"
   ]},
   {subj:"spt", items:[
     "Максимирање користи: проблем нелегитимних преференција",
@@ -240,15 +256,20 @@ const DAYS = [
     "Утилитаризам и једнакост: спољне и себичне преференције",
     "Политика утилитаризма"
   ]},
+  {subj:"eng", items:[
+    "Second conditional (хипотетичка садашњост/будућност)",
+    "Third conditional (хипотетичка прошлост)",
+    "Mixed conditionals (мешовити кондиционали)"
+  ]},
   {subj:"spi", items:[
-    "Trumanova doktrina i Maršalov plan",
-    "Stvaranje paktova i trka u naoružanju",
-    "Kineski građanski rat",
-    "Japan pod okupacijom",
-    "Rat u Koreji"
+    "Труманова доктрина и Маршалов план",
+    "Стварање пактова и трка у наоружању",
+    "Кинески грађански рат",
+    "Јапан под окупацијом",
+    "Рат у Кореји"
   ]}
 ]},
-{date:"7. септембар", groups:[
+{date:"7. септембар", note:"⏱ Издвоји пола сата за енглески.", groups:[
   {subj:"ess", items:[
     "Економске функције државе у савременој робној привреди",
     "Институционална теорија државе - тржишни неуспеси и улога државе",
@@ -256,8 +277,8 @@ const DAYS = [
     "Појам, елементи и врсте економске политике"
   ]},
   {subj:"ibo", items:[
-    "Majski prevrat i vlast Petra I (1903-1912)",
-    "Aneksiona kriza i odnosi AU i Srbije"
+    "Мајски преврат и власт Петра И (1903-1912)",
+    "Анексиона криза и односи АУ и Србије"
   ]},
   {subj:"spt", items:[
     "Ролсова теорија правде",
@@ -265,22 +286,27 @@ const DAYS = [
     "Ролсов аргумент друштвеног уговора",
     "Дворкинова теорија једнакости ресурса"
   ]},
+  {subj:"eng", items:[
+    "-ing form vs infinitive: глаголи + -ing, + to infinitiv, + особа + to infinitiv",
+    "Causative have (have something done)",
+    "7.1 Врсте ТВ програма и основни термини"
+  ]},
   {subj:"spi", items:[
-    "Ajzenhauerova era",
-    "Dekolonizacija nakon Drugog svetskog rata",
-    "Nezavisnost Indije",
-    "Rat na prostoru Indokine (1945-1954)"
+    "Ајзенхауерова ера",
+    "Деколонизација након Другог светског рата",
+    "Независност Индије",
+    "Рат на простору Индокине (1945-1954)"
   ]}
 ]},
-{date:"8. септембар", groups:[
+{date:"8. септембар", note:"⏱ Издвоји пола сата за енглески.", groups:[
   {subj:"ess", items:[
     "Политика и економска политика на нашем државном простору",
     "Формални и стварни циљеви економске политике",
     "Процес транзиције: појам и садржај"
   ]},
   {subj:"ibo", items:[
-    "Balkanski ratovi i njihove posledice",
-    "Prvi svetski rat na Balkanu od 1914. do kraja 1915. godine"
+    "Балкански ратови и њихове последице",
+    "Први светски рат на Балкану од 1914. до краја 1915. године"
   ]},
   {subj:"spt", items:[
     "Примена Дворкинове теорије једнакости ресурса",
@@ -288,40 +314,50 @@ const DAYS = [
     "Нова десница и држава благостања",
     "Комунитаризам и границе правде: заједничка значења"
   ]},
+  {subj:"eng", items:[
+    "7.2 The Press/Media — детаљан вокабулар",
+    "7.3 Глаголи говорења у новинарству (reporting verbs — нијансе)",
+    "7.4 Multi-word verbs (медијски/општи контекст)"
+  ]},
   {subj:"spi", items:[
-    "Bliski istok i stvaranje Izraela",
-    "Sueska kriza 1956.",
-    "SSSR za vreme Nikite Hruščova",
-    "Revolucija u Mađarskoj 1956.",
-    "Nastanak Pete republike u Francuskoj"
+    "Блиски исток и стварање Израела",
+    "Суеска криза 1956.",
+    "СССР за време Никите Хрушчова",
+    "Револуција у Мађарској 1956.",
+    "Настанак Пете републике у Француској"
   ]}
 ]},
-{date:"9. септембар", groups:[
+{date:"9. септембар", note:"⏱ Издвоји пола сата за енглески.", groups:[
   {subj:"ess", items:[
     "Транзиција и идеолошке предрасуде; економска наука и транзиција",
     "Приватизација и ефикасност - проблем односа принципала и агента",
     "Макроекономска основа приватизације",
-    "Међународне економске интеграције - пример CEFTA-е"
+    "Међународне економске интеграције - пример ЦЕФТА-е"
   ]},
   {subj:"ibo", items:[
-    "Prvi svetski rat na Balkanu od 1916. do 1918. godine",
-    "Versajska mirovna konferencija i geopolitičke promene na Balkanu posle Prvog svetskog rata"
+    "Први светски рат на Балкану од 1916. до 1918. године",
+    "Версајска мировна конференција и геополитичке промене на Балкану после Првог светског рата"
   ]},
   {subj:"spt", items:[
     "Комунитаризам: индивидуална права, опште добро, неутрална држава",
     "Политички либерализам: аутономија и толеранција",
-    "Политички либерализам vs. обухватни либерализам: Ролсова ревизија",
+    "Политички либерализам вс. обухватни либерализам: Ролсова ревизија",
     "Друштвена условљеност аутономије и дужност одржања културе",
     "Модели мултикултурализма: националне мањине"
   ]},
+  {subj:"eng", items:[
+    "7.5 Додатни ТВ/медиа вокабулар",
+    "7.6 Adding emphasis — вокабулар",
+    "7.7 When things go wrong — фразе за препричавање вести"
+  ]},
   {subj:"spi", items:[
-    "Integracija Zapadne Evrope i stvaranje EEZ",
-    "Pokret nesvrstanih",
-    "Dekolonizacija Afrike",
-    "Kubanska revolucija i sukobi dve supersile"
+    "Интеграција Западне Европе и стварање ЕЕЗ",
+    "Покрет несврстаних",
+    "Деколонизација Африке",
+    "Кубанска револуција и сукоби две суперсиле"
   ]}
 ]},
-{date:"10. септембар", groups:[
+{date:"10. септембар", note:"⏱ Издвоји пола сата за енглески.", groups:[
   {subj:"ess", items:[
     "Модели приватизације",
     "Специфичности приватизације друштвене својине - настанак и ефикасност друштвене својине",
@@ -329,9 +365,9 @@ const DAYS = [
     "Мерење нивоа развијености"
   ]},
   {subj:"ibo", items:[
-    "Kraljevina SHS/Jugoslavija između dva svetska rata",
-    "Kemal Ataturk i turska država između dva svetska rata",
-    "Balkan u politici sila tokom Drugog svetskog rata"
+    "Краљевина СХС/Југославија између два светска рата",
+    "Кемал Ататурк и турска држава између два светска рата",
+    "Балкан у политици сила током Другог светског рата"
   ]},
   {subj:"spt", items:[
     "Либерализам и проблем колективне делиберације изван политике",
@@ -340,15 +376,20 @@ const DAYS = [
     "Национализам и космополитизам",
     "Модели мултикултурализма: имигрантске групе"
   ]},
+  {subj:"eng", items:[
+    "8.1 Личност и карактер — парови који НИСУ синоними",
+    "8.2 Compound adjectives (сложени придеви)",
+    "8.3 Values — вредности"
+  ]},
   {subj:"spi", items:[
-    "Sukobi na Bliskom istoku 60-ih godina",
-    "Kulturna revolucija u Kini",
-    "Detant i ograničavanje trke u naoružanju",
-    "SAD u Vijetnamu",
-    "Studentski protesti"
+    "Сукоби на Блиском истоку 60-их година",
+    "Културна револуција у Кини",
+    "Детант и ограничавање трке у наоружању",
+    "САД у Вијетнаму",
+    "Студентски протести"
   ]}
 ]},
-{date:"11. септембар", groups:[
+{date:"11. септембар", note:"⏱ Издвоји пола сата за енглески.", groups:[
   {subj:"ess", items:[
     "Приватизација у Југославији (Србији) до 2000. године",
     "Приватизација у Србији после 2000. године",
@@ -356,9 +397,9 @@ const DAYS = [
     "Динамика развоја индустрије у Србији - запосленост и инвестиције у индустрији"
   ]},
   {subj:"ibo", items:[
-    "Grčka pod Venizelosom i Metaksisom",
-    "Albanija pod Ahmedom Zoguom",
-    "Britanija i pokreti otpora na Balkanu tokom WWII"
+    "Грчка под Венизелосом и Метаксисом",
+    "Албанија под Ахмедом Зогуом",
+    "Британија и покрети отпора на Балкану током Другог светског рата"
   ]},
   {subj:"spt", items:[
     "Врлине демократских грађана",
@@ -367,22 +408,27 @@ const DAYS = [
     "Либерални републиканизам и инструменталне врлине",
     "Полна једнакост и полна дискриминација"
   ]},
+  {subj:"eng", items:[
+    "8.4 Decisions — колокације са нијансама",
+    "8.5 Behaviour — глаголи, изрази и идиоми",
+    "8.6 Handling an awkward situation — functional language"
+  ]},
   {subj:"spi", items:[
-    "Istočna politika Vilija Branta",
-    "Sukobi na Bliskom istoku 70-ih godina",
-    "Rat u Avganistanu",
-    "VB za vreme Margaret Tačer"
+    "Источна политика Вилија Бранта",
+    "Сукоби на Блиском истоку 70-их година",
+    "Рат у Авганистану",
+    "ВБ за време Маргарет Тачер"
   ]}
 ]},
-{date:"12. септембар", groups:[
+{date:"12. септембар", note:"✅ Овим се завршава прва рунда енглеског (граматика + вокабулар Unit 7 & 8).", groups:[
   {subj:"ess", items:[
     "Економско стање пољопривреде од 1945. до 1957. године",
     "Сељачко газдинство у аграрној политици и самоуправљању од 1957. године",
     "Пољопривреда у средњорочним плановима развоја Југославије од 1976. до 1985. године"
   ]},
   {subj:"ibo", items:[
-    "Rumunija u međuratnom periodu",
-    "Bugarska u međuratnom periodu"
+    "Румунија у међуратном периоду",
+    "Бугарска у међуратном периоду"
   ]},
   {subj:"spt", items:[
     "Извори грађанских врлина",
@@ -391,28 +437,31 @@ const DAYS = [
     "Мултикултурална критика „грађанства као права\""
   ]},
   {subj:"eng", items:[
+    "8.7 Idioms connected to time",
+    "Најчешће замке на тесту (Unit 7 & 8) — преглед",
+    "Додатни општи вокабулар + преглед глаголских конструкција + брза референца за препознавање облика",
     "Прво читање текстова (без литературе, само текстови)"
   ]},
   {subj:"spi", items:[
-    "SAD za vreme Ronalda Regana",
-    "Kraj Hladnog rata",
-    "Amerika 90-ih godina",
-    "Slom socijalizma u Evropi",
-    "Zalivski rat"
+    "САД за време Роналда Регана",
+    "Крај Хладног рата",
+    "Америка 90-их година",
+    "Слом социјализма у Европи",
+    "Заливски рат"
   ]}
 ]},
-{date:"13. септембар", note:"🔵 САМО ЕНГЛЕСКИ ЈЕЗИК 2 — друго читање текстова. Не учи се ЕСС, ни ИБО, ни СПТ.", review:{subj:"eng", label:"Друго читање текстова (без литературе, само текстови)"}},
-{date:"14. септембар", examFlag:"ИСПИТ — Енглески језик 2", note:"После испита поподне:", groups:[
+{date:"13. септембар", note:"🔵 САМО ЕНГЛЕСКИ ЈЕЗИК 2 — целодневни финални преглед ОБЕ скрипте пред колоквијум. Не учи се ЕСС, ни ИБО, ни СПТ.", review:{subj:"eng", label:"Комплетан преглед: цела скрипта Unit 7 & 8 (граматика + вокабулар) + друго читање текстова + решавање свих вежби из збирке (Verzije A–F, kondicionali, reported speech)"}},
+{date:"14. септембар", examFlag:"КОЛОКВИЈУМ — Енглески језик 2", examCheck:"Изашла сам на колоквијум — Енглески језик 2", note:"🚨 последњи дан новог градива из СПИ", groups:[
   {subj:"ess", items:[
     "Темпо и динамика спољнотрговинске размене Србије",
     "Спољни дуг Србије",
     "Стране директне инвестиције у Србији"
   ]},
   {subj:"ibo", groupNote:"надокнада, 4 теме", items:[
-    "Balkanska multilateralna saradnja između dva svetska rata",
-    "Francuski i italijanski sistem saveza na Balkanu između dva svetska rata i Mala antanta",
-    "Uticaj fašizma i nacizma na Balkanu tridesetih godina XX veka",
-    "Prodor Musolinija i Hitlera na Balkan 1939-1941."
+    "Балканска мултилатерална сарадња између два светска рата",
+    "Француски и италијански систем савеза на Балкану између два светска рата и Мала антанта",
+    "Утицај фашизма и нацизма на Балкану тридесетих година XX века",
+    "Продор Мусолинија и Хитлера на Балкан 1939-1941."
   ]},
   {subj:"spt", items:[
     "Политика прерасподеле и политика признања",
@@ -421,22 +470,22 @@ const DAYS = [
     "Мултикултурализам и изградња нације"
   ]},
   {subj:"spi", items:[
-    "Daleki istok 90-ih godina",
-    "Stanje u Evropi 90-ih godina",
-    "Rusija za vreme Borisa Jeljcina",
-    "Bliski istok 90-ih godina"
+    "Далеки исток 90-их година",
+    "Стање у Европи 90-их година",
+    "Русија за време Бориса Јељцина",
+    "Блиски исток 90-их година"
   ]}
 ]},
 {date:"15. септембар", note:"🟢 САМО САВРЕМЕНА ПОЛИТИЧКА ИСТОРИЈА — целодневно понављање свих 45 питања. Не учи се ништа друго.", review:{subj:"spi", label:"Поновљено свих 45 питања"}},
-{date:"16. септембар", examFlag:"ИСПИТ — Савремена политичка историја", note:"После испита поподне — 🚨 последњи дан новог градива из ЕСС", afterNotes:["✅ Први пролаз ЕСС завршен"], groups:[
-  {subj:"ess", items:[
+{date:"16. септембар", examFlag:"ИСПИТ — Савремена политичка историја", examCheck:"Изашла сам на испит — Савремена политичка историја", note:"🚨 последњи дан новог градива из ЕСС", groups:[
+  {subj:"ess", doneNote:"✅ Први пролаз ЕСС завршен", items:[
     "Ефекти приватизације у Србији и индустрија",
     "Реструктурирање јавних предузећа",
     "Концепт приватизације јавних предузећа"
   ]},
   {subj:"ibo", items:[
-    "Pokreti otpora na Balkanu tokom Drugog svetskog rata",
-    "Uzroci i posledice sporazuma Staljina i Čerčila o podeli interesnih sfera na Balkanu posle Drugog svetskog rata"
+    "Покрети отпора на Балкану током Другог светског рата",
+    "Узроци и последице споразума Стаљина и Черчила о подели интересних сфера на Балкану после Другог светског рата"
   ]},
   {subj:"spt", items:[
     "Јавно и приватно: држава и цивилно друштво",
@@ -444,19 +493,27 @@ const DAYS = [
     "Етика бриге и етика правде: моралне способности и расуђивање"
   ]}
 ]},
-{date:"17. септембар", afterNotes:["✅ Први пролаз ИБО завршен"], groups:[
-  {subj:"ibo", items:[
-    "Mirovni sporazumi i početak hladnoratovskih podela interesnih sfera na Balkanu nakon Drugog svetskog rata",
-    "Građanski rat u Grčkoj 1945-1949."
+{date:"17. септембар", note:"🚨 последњи дан новог градива из ИБО. Плус: додатни дан за ЕСС — активно понављање, не само прелиставање (ЕСС није лак предмет).", groups:[
+  {subj:"ess", groupNote:"додатни дан пре „чисто понављање“ дана — искористи га пуно", items:[
+    "Активно понављање свих досадашњих тема ЕСС (закључно са 16.9) — реши свако питање као на испиту, не само прочитај наслов",
+    "Издвоји и поново прегледај теме које ти нису биле јасне из прве"
+  ]},
+  {subj:"ibo", doneNote:"✅ Први пролаз ИБО завршен", items:[
+    "Мировни споразуми и почетак хладноратовских подела интересних сфера на Балкану након Другог светског рата",
+    "Грађански рат у Грчкој 1945-1949."
   ]},
   {subj:"spt", items:[
-    "Етика бриге и етика правде: универзалност vs. очување односа",
-    "Етика бриге и етика правде: човечанство vs. индивидуалност",
+    "Етика бриге и етика правде: универзалност вс. очување односа",
+    "Етика бриге и етика правде: човечанство вс. индивидуалност",
     "Етика бриге и етика правде: права и одговорности"
   ]}
 ]},
-{date:"18. септембар", note:"🔴 САМО ЕКОНОМСКИ СИСТЕМ СРБИЈЕ — целодневно понављање свих 40 тема. Не учи се Историја. Не учи се СПТ. Не учи се ново градиво.", review:{subj:"ess", label:"Поновљено свих 40 тема"}},
-{date:"19. септембар", examFlag:"ИСПИТ — Економски систем Србије", note:"После испита поподне:", groups:[
+{date:"18. септембар", note:"🔴 ГЛАВНИ ФОКУС: ЕКОНОМСКИ СИСТЕМ СРБИЈЕ — целодневно понављање свих 40 тема. Плус: ИБО добија лагано прелиставање (~15 мин), да дан не остане мртав за њега. Не учи се СПТ. Не учи се ново градиво.", groups:[
+  {subj:"ibo", groupNote:"лагано, само прелиставање — фокус дана је ЕСС", items:[
+    "Лагано прелиставање свих 31 питања ИБО (наслови и кратки одговори, ~15 мин)"
+  ]}
+], review:{subj:"ess", label:"Поновљено свих 40 тема"}},
+{date:"19. септембар", examFlag:"ИСПИТ — Економски систем Србије", examCheck:"Изашла сам на испит — Економски систем Србије", groups:[
   {subj:"ibo", groupNote:"испит за 2 дана", items:[
     "Понављање свих 31 питања"
   ]},
@@ -467,7 +524,7 @@ const DAYS = [
   ]}
 ]},
 {date:"20. септембар", note:"🟠 САМО ИСТОРИЈА БАЛКАНСКИХ ОДНОСА — целодневно понављање свих 31 питања. Не учи се СПТ. Не учи се ново градиво.", review:{subj:"ibo", label:"Поновљено свих 31 питање"}},
-{date:"21. септембар", examFlag:"ИСПИТ — Историја балканских односа", note:"После испита поподне:", groups:[
+{date:"21. септембар", examFlag:"ИСПИТ — Историја балканских односа", examCheck:"Изашла сам на испит — Историја балканских односа", groups:[
   {subj:"spt", items:[
     "Демократија као форма и суштина (Маркс)",
     "Марксов однос према изборима и демократији",
@@ -488,15 +545,15 @@ const DAYS = [
     "Реалистички појам демократије"
   ]}
 ]},
-{date:"24. септембар", note:"🚨 Последњи дан новог градива из СПТ", afterNotes:["✅ Први пролаз свих 64 питања СПТ завршен"], groups:[
-  {subj:"spt", items:[
+{date:"24. септембар", note:"🚨 Последњи дан новог градива из СПТ", groups:[
+  {subj:"spt", doneNote:"✅ Први пролаз свих 64 питања СПТ завршен", items:[
     "Тријумф демократије и постдемократија",
     "Постдемократија као дијагноза стања реалне демократије",
     "Постдемократија као отклон од реалне демократије"
   ]}
 ]},
 {date:"25. септембар", note:"🟡 САМО САВРЕМЕНА ПОЛИТИЧКА ТЕОРИЈА — целодневно понављање свих 64 питања. Не учи се ништа друго.", review:{subj:"spt", label:"Поновљено свих 64 питања"}},
-{date:"26. септембар", examFlag:"ИСПИТ — Савремена политичка теорија"}
+{date:"26. септембар", examFlag:"ИСПИТ — Савремена политичка теорија", examCheck:"Изашла сам на испит — Савремена политичка теорија"}
 ];
 
 let progress = {};
@@ -515,6 +572,9 @@ function buildIndex(){
     }
     if(day.review){
       itemIndex.push({id:`d${di}-review`, subj:day.review.subj});
+    }
+    if(day.examCheck){
+      itemIndex.push({id:`d${di}-examcheck`, subj:null});
     }
   });
 }
@@ -538,6 +598,10 @@ function render(){
       dayTotal++;
       if(progress[`d${di}-review`]) dayChecked++;
     }
+    if(day.examCheck){
+      dayTotal++;
+      if(progress[`d${di}-examcheck`]) dayChecked++;
+    }
 
     const header = document.createElement('div');
     header.className = 'day-header';
@@ -554,6 +618,14 @@ function render(){
 
     const body = document.createElement('div');
     body.className = 'day-body';
+
+    if(day.examCheck){
+      const id = `d${di}-examcheck`;
+      const ec = document.createElement('div');
+      ec.className = 'examcheck-block';
+      ec.innerHTML = `<label class="item"><input type="checkbox" data-id="${id}" ${progress[id]?'checked':''}/><span class="txt">${day.examCheck}</span></label>`;
+      body.appendChild(ec);
+    }
 
     if(day.note){
       const n = document.createElement('div');
@@ -577,6 +649,12 @@ function render(){
           grp.appendChild(lab);
         });
         body.appendChild(grp);
+        if(g.doneNote){
+          const n = document.createElement('div');
+          n.className = 'note done';
+          n.textContent = g.doneNote;
+          body.appendChild(n);
+        }
       });
     }
 
@@ -587,15 +665,6 @@ function render(){
       rb.className = 'review-block';
       rb.innerHTML = `<label class="item"><input type="checkbox" data-id="${id}" ${progress[id]?'checked':''}/><span class="txt" style="color:${s.color}">${day.review.label}</span></label>`;
       body.appendChild(rb);
-    }
-
-    if(day.afterNotes){
-      day.afterNotes.forEach(txt=>{
-        const n = document.createElement('div');
-        n.className = 'note done';
-        n.textContent = txt;
-        body.appendChild(n);
-      });
     }
 
     dayEl.appendChild(header);
