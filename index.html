@@ -141,7 +141,7 @@
   .roast.early{color:var(--green);}
   .roast.ontime{color:var(--blue);}
 
-  .comment-row{margin:0 0 10px 30px;}
+  .comment-row{margin:12px 0 4px;}
   .comment-input{
     width:100%;max-width:440px;background:#1c1f26;border:1px solid var(--card-border);color:var(--text);
     border-radius:8px;padding:6px 9px;font-size:11.5px;font-family:inherit;resize:vertical;min-height:30px;
@@ -237,29 +237,33 @@ function getPlanned(subj, text, factor){
 
 // Each day: {date, examFlag, note, afterNotes: [...], groups: [{subj, groupNote, items: [...]}], review: {subj, label}}
 const DAYS = [
-{date:"4. septembar", groups:[
+{date:"6. septembar", groups:[
   {subj:"eng", items:[
     "Kvantifikatori: many/much, a lot of, few/a little, plenty of, enough",
     "Kvantifikatori: too much/too many, both/either/neither, ostali (each, every, several, quite a few...)",
-    "Reported speech: potvrdne i odrične izjave, backshift tabela"
+    "Reported speech: potvrdne i odrične izjave, backshift tabela",
+    "Reported speech: promene vremena i mesta, say vs tell"
   ]},
   {subj:"spi", items:[
     "Prva faza Drugog svetskog rata 1939-1941",
     "Druga faza Drugog svetskog rata 1941-1943",
     "Treća faza Drugog svetskog rata",
     "Pokreti otpora u Evropi",
-    "Podela Nemačke nakon Drugog svetskog rata"
+    "Podela Nemačke nakon Drugog svetskog rata",
+    "Stvaranje socijalističkih država u Evropi"
   ]},
   {subj:"ess", items:[
     "Privredni sistem - osnovno određenje i definisanje",
     "Sadržaj i osnovne komponente privrednog sistema",
     "Grupisanje (tipologija) privrednih sistema",
-    "Vrednovanje uspešnosti privrednih sistema"
+    "Vrednovanje uspešnosti privrednih sistema",
+    "Uporedni metod i poređenje privrednih sistema"
   ]},
   {subj:"ibo", items:[
     "Sanstefanski mir i stvaranje bugarske države (1878-1908)",
     "Velika istočna kriza i Berlinski kongres",
-    "Nastanak i razvoj hrvatskog nacionalnog pitanja u 19. veku"
+    "Nastanak i razvoj hrvatskog nacionalnog pitanja u 19. veku",
+    "Prizrenska liga i stvaranje albanskog nacionalnog pokreta (1878-1913)"
   ]},
   {subj:"spt", items:[
     "Pozitivna i negativna sloboda",
@@ -268,28 +272,31 @@ const DAYS = [
     "Pravo, moral, paternalizam"
   ]}
 ]},
-{date:"5. septembar", groups:[
+{date:"7. septembar", groups:[
   {subj:"eng", items:[
-    "Reported speech: promene vremena i mesta, say vs tell",
     "Reported speech: reported questions, reported commands/requests, reporting verbs",
-    "Adding emphasis (naglašavanje)"
+    "Adding emphasis (naglašavanje)",
+    "Second conditional (hipotetička sadašnjost/budućnost)",
+    "Third conditional (hipotetička prošlost)"
   ]},
   {subj:"spi", items:[
-    "Stvaranje socijalističkih država u Evropi",
     "Početak Hladnog rata",
     "Stvaranje i delatnost Ujedinjenih nacija",
-    "Prve hladnoratovske krize — Iran, Turska i Grčka"
+    "Prve hladnoratovske krize — Iran, Turska i Grčka",
+    "Trumanova doktrina i Maršalov plan",
+    "Stvaranje paktova i trka u naoružanju",
+    "Kineski građanski rat"
   ]},
   {subj:"ess", items:[
-    "Uporedni metod i poređenje privrednih sistema",
     "Razvoj privrednog sistema Srbije",
     "Merenje makroekonomske aktivnosti - BDP",
-    "Merenje makroekonomske aktivnosti - stopa inflacije i stopa nezaposlenosti"
+    "Merenje makroekonomske aktivnosti - stopa inflacije i stopa nezaposlenosti",
+    "Merenje makroekonomske aktivnosti - kamatna stopa i devizni kurs"
   ]},
   {subj:"ibo", items:[
-    "Prizrenska liga i stvaranje albanskog nacionalnog pokreta (1878-1913)",
     "Makedonsko pitanje u balkanskim i evropskim odnosima",
-    "Ideje o ujedinjenju južnoslovenskih naroda u 19. veku"
+    "Ideje o ujedinjenju južnoslovenskih naroda u 19. veku",
+    "Crna Gora u vreme Nikole Petrovića"
   ]},
   {subj:"spt", items:[
     "Utilitarizam i njegova privlačnost",
@@ -298,29 +305,32 @@ const DAYS = [
     "Maksimiranje koristi: U-agent i posebni odnosi"
   ]}
 ]},
-{date:"6. septembar", groups:[
+{date:"8. septembar", groups:[
   {subj:"eng", items:[
-    "Second conditional (hipotetička sadašnjost/budućnost)",
-    "Third conditional (hipotetička prošlost)",
-    "Mixed conditionals (mešoviti kondicionali)"
+    "Mixed conditionals (mešoviti kondicionali)",
+    "-ing form vs infinitive: glagoli + -ing, + to infinitiv, + osoba + to infinitiv",
+    "Causative have (have something done)",
+    "7.1 Vrste TV programa i osnovni termini"
   ]},
   {subj:"spi", items:[
-    "Trumanova doktrina i Maršalov plan",
-    "Stvaranje paktova i trka u naoružanju",
-    "Kineski građanski rat",
     "Japan pod okupacijom",
-    "Rat u Koreji"
+    "Rat u Koreji",
+    "Ajzenhauerova era",
+    "Dekolonizacija nakon Drugog svetskog rata",
+    "Nezavisnost Indije",
+    "Rat na prostoru Indokine (1945-1954)"
   ]},
   {subj:"ess", items:[
-    "Merenje makroekonomske aktivnosti - kamatna stopa i devizni kurs",
     "Privredni rast - značaj; stabilnost vs. rast",
     "Privredni razvoj - značaj; osnovne komponente; razvijenost i nerazvijenost",
-    "Razlikovanje pojmova razvoja i rasta"
+    "Razlikovanje pojmova razvoja i rasta",
+    "Ekonomske funkcije države u savremenoj robnoj privredi",
+    "Institucionalna teorija države - tržišni neuspesi i uloga države"
   ]},
   {subj:"ibo", items:[
-    "Crna Gora u vreme Nikole Petrovića",
     "Srbija pod vlašću poslednjih Obrenovića",
-    "Mladoturska revolucija i stvaranje turske nacije"
+    "Mladoturska revolucija i stvaranje turske nacije",
+    "Majski prevrat i vlast Petra I (1903-1912)"
   ]},
   {subj:"spt", items:[
     "Maksimiranje koristi: problem nelegitimnih preferencija",
@@ -329,27 +339,31 @@ const DAYS = [
     "Politika utilitarizma"
   ]}
 ]},
-{date:"7. septembar", groups:[
+{date:"9. septembar", groups:[
   {subj:"eng", items:[
-    "-ing form vs infinitive: glagoli + -ing, + to infinitiv, + osoba + to infinitiv",
-    "Causative have (have something done)",
-    "7.1 Vrste TV programa i osnovni termini"
+    "7.2 The Press/Media — detaljan vokabular",
+    "7.3 Glagoli govorenja u novinarstvu (reporting verbs — nijanse)",
+    "7.4 Multi-word verbs (medijski/opšti kontekst)",
+    "7.5 Dodatni TV/media vokabular"
   ]},
   {subj:"spi", items:[
-    "Ajzenhauerova era",
-    "Dekolonizacija nakon Drugog svetskog rata",
-    "Nezavisnost Indije",
-    "Rat na prostoru Indokine (1945-1954)"
+    "Bliski istok i stvaranje Izraela",
+    "Sueska kriza 1956.",
+    "SSSR za vreme Nikite Hruščova",
+    "Revolucija u Mađarskoj 1956.",
+    "Nastanak Pete republike u Francuskoj",
+    "Integracija Zapadne Evrope i stvaranje EEZ"
   ]},
   {subj:"ess", items:[
-    "Ekonomske funkcije države u savremenoj robnoj privredi",
-    "Institucionalna teorija države - tržišni neuspesi i uloga države",
     "Politička makroekonomija - loše i dobre institucije",
-    "Pojam, elementi i vrste ekonomske politike"
+    "Pojam, elementi i vrste ekonomske politike",
+    "Politika i ekonomska politika na našem državnom prostoru",
+    "Formalni i stvarni ciljevi ekonomske politike"
   ]},
   {subj:"ibo", items:[
-    "Majski prevrat i vlast Petra I (1903-1912)",
-    "Aneksiona kriza i odnosi AU i Srbije"
+    "Aneksiona kriza i odnosi AU i Srbije",
+    "Balkanski ratovi i njihove posledice",
+    "Prvi svetski rat na Balkanu od 1914. do kraja 1915. godine"
   ]},
   {subj:"spt", items:[
     "Rolsova teorija pravde",
@@ -358,27 +372,32 @@ const DAYS = [
     "Dvorkinova teorija jednakosti resursa"
   ]}
 ]},
-{date:"8. septembar", groups:[
+{date:"10. septembar", groups:[
   {subj:"eng", items:[
-    "7.2 The Press/Media — detaljan vokabular",
-    "7.3 Glagoli govorenja u novinarstvu (reporting verbs — nijanse)",
-    "7.4 Multi-word verbs (medijski/opšti kontekst)"
+    "7.6 Adding emphasis — vokabular",
+    "7.7 When things go wrong — fraze za prepričavanje vesti",
+    "8.1 Ličnost i karakter — parovi koji NISU sinonimi",
+    "8.2 Compound adjectives (složeni pridevi)"
   ]},
   {subj:"spi", items:[
-    "Bliski istok i stvaranje Izraela",
-    "Sueska kriza 1956.",
-    "SSSR za vreme Nikite Hruščova",
-    "Revolucija u Mađarskoj 1956.",
-    "Nastanak Pete republike u Francuskoj"
+    "Pokret nesvrstanih",
+    "Dekolonizacija Afrike",
+    "Kubanska revolucija i sukobi dve supersile",
+    "Sukobi na Bliskom istoku 60-ih godina",
+    "Kulturna revolucija u Kini",
+    "Detant i ograničavanje trke u naoružanju"
   ]},
   {subj:"ess", items:[
-    "Politika i ekonomska politika na našem državnom prostoru",
-    "Formalni i stvarni ciljevi ekonomske politike",
-    "Proces tranzicije: pojam i sadržaj"
+    "Proces tranzicije: pojam i sadržaj",
+    "Tranzicija i ideološke predrasude; ekonomska nauka i tranzicija",
+    "Privatizacija i efikasnost - problem odnosa principala i agenta",
+    "Makroekonomska osnova privatizacije",
+    "Modeli privatizacije"
   ]},
   {subj:"ibo", items:[
-    "Balkanski ratovi i njihove posledice",
-    "Prvi svetski rat na Balkanu od 1914. do kraja 1915. godine"
+    "Prvi svetski rat na Balkanu od 1916. do 1918. godine",
+    "Versajska mirovna konferencija i geopolitičke promene na Balkanu posle Prvog svetskog rata",
+    "Kraljevina SHS/Jugoslavija između dva svetska rata"
   ]},
   {subj:"spt", items:[
     "Primena Dvorkinove teorije jednakosti resursa",
@@ -387,48 +406,19 @@ const DAYS = [
     "Komunitarizam i granice pravde: zajednička značenja"
   ]}
 ]},
-{date:"9. septembar", groups:[
+{date:"11. septembar", groups:[
   {subj:"eng", items:[
-    "7.5 Dodatni TV/media vokabular",
-    "7.6 Adding emphasis — vokabular",
-    "7.7 When things go wrong — fraze za prepričavanje vesti"
+    "8.3 Values — vrednosti",
+    "8.4 Decisions — kolokacije sa nijansama",
+    "8.5 Behaviour — glagoli, izrazi i idiomi",
+    "8.6 Handling an awkward situation — functional language"
   ]},
   {subj:"spi", items:[
-    "Integracija Zapadne Evrope i stvaranje EEZ",
-    "Pokret nesvrstanih",
-    "Dekolonizacija Afrike",
-    "Kubanska revolucija i sukobi dve supersile"
-  ]},
-  {subj:"ess", items:[
-    "Tranzicija i ideološke predrasude; ekonomska nauka i tranzicija",
-    "Privatizacija i efikasnost - problem odnosa principala i agenta",
-    "Makroekonomska osnova privatizacije",
-    "Modeli privatizacije"
-  ]},
-  {subj:"ibo", items:[
-    "Prvi svetski rat na Balkanu od 1916. do 1918. godine",
-    "Versajska mirovna konferencija i geopolitičke promene na Balkanu posle Prvog svetskog rata"
-  ]},
-  {subj:"spt", items:[
-    "Komunitarizam: individualna prava, opšte dobro, neutralna država",
-    "Politički liberalizam: autonomija i tolerancija",
-    "Politički liberalizam vs. obuhvatni liberalizam: Rolsova revizija",
-    "Društvena uslovljenost autonomije i dužnost održanja kulture",
-    "Modeli multikulturalizma: nacionalne manjine"
-  ]}
-]},
-{date:"10. septembar", groups:[
-  {subj:"eng", items:[
-    "8.1 Ličnost i karakter — parovi koji NISU sinonimi",
-    "8.2 Compound adjectives (složeni pridevi)",
-    "8.3 Values — vrednosti"
-  ]},
-  {subj:"spi", items:[
-    "Sukobi na Bliskom istoku 60-ih godina",
-    "Kulturna revolucija u Kini",
-    "Detant i ograničavanje trke u naoružanju",
     "SAD u Vijetnamu",
-    "Studentski protesti"
+    "Studentski protesti",
+    "Istočna politika Vilija Branta",
+    "Sukobi na Bliskom istoku 70-ih godina",
+    "Rat u Avganistanu"
   ]},
   {subj:"ess", items:[
     "Specifičnosti privatizacije društvene svojine - nastanak i efikasnost društvene svojine",
@@ -437,47 +427,15 @@ const DAYS = [
     "Privatizacija u Srbiji posle 2000. godine"
   ]},
   {subj:"ibo", items:[
-    "Kraljevina SHS/Jugoslavija između dva svetska rata",
     "Kemal Ataturk i turska država između dva svetska rata",
-    "Balkan u politici sila tokom Drugog svetskog rata"
+    "Balkan u politici sila tokom Drugog svetskog rata",
+    "Grčka pod Venizelosom i Metaksisom"
   ]},
   {subj:"spt", items:[
-    "Liberalizam i problem kolektivne deliberacije izvan politike",
-    "Politički liberalizam: zajedničke vrednosti, solidarnost, legitimitet",
-    "Liberalni nacionalizam",
-    "Nacionalizam i kosmopolitizam",
-    "Modeli multikulturalizma: imigrantske grupe"
-  ]}
-]},
-{date:"11. septembar", groups:[
-  {subj:"eng", items:[
-    "8.4 Decisions — kolokacije sa nijansama",
-    "8.5 Behaviour — glagoli, izrazi i idiomi",
-    "8.6 Handling an awkward situation — functional language"
-  ]},
-  {subj:"spi", items:[
-    "Istočna politika Vilija Branta",
-    "Sukobi na Bliskom istoku 70-ih godina",
-    "Rat u Avganistanu",
-    "VB za vreme Margaret Tačer"
-  ]},
-  {subj:"ess", items:[
-    "Privatizacija i institucionalno okruženje",
-    "Ekonomsko stanje poljoprivrede od 1945. do 1957. godine",
-    "Seljačko gazdinstvo u agrarnoj politici i samoupravljanju od 1957. godine",
-    "Poljoprivreda u srednjoročnim planovima razvoja Jugoslavije od 1976. do 1985. godine"
-  ]},
-  {subj:"ibo", items:[
-    "Grčka pod Venizelosom i Metaksisom",
-    "Albanija pod Ahmedom Zoguom",
-    "Britanija i pokreti otpora na Balkanu tokom Drugog svetskog rata"
-  ]},
-  {subj:"spt", items:[
-    "Vrline demokratskih građana",
-    "Javna razloženost: agregativna i deliberativna demokratija",
-    "Građanski republikanizam",
-    "Liberalni republikanizam i instrumentalne vrline",
-    "Polna jednakost i polna diskriminacija"
+    "Komunitarizam: individualna prava, opšte dobro, neutralna država",
+    "Politički liberalizam: autonomija i tolerancija",
+    "Politički liberalizam vs. obuhvatni liberalizam: Rolsova revizija",
+    "Društvena uslovljenost autonomije i dužnost održanja kulture"
   ]}
 ]},
 {date:"12. septembar", note:"✅ Ovim se završava prva runda engleskog (gramatika + vokabular Unit 7 & 8).", groups:[
@@ -488,69 +446,76 @@ const DAYS = [
     "Prvo čitanje tekstova (bez literature, samo tekstovi)"
   ]},
   {subj:"spi", items:[
+    "VB za vreme Margaret Tačer",
     "SAD za vreme Ronalda Regana",
     "Kraj Hladnog rata",
     "Amerika 90-ih godina",
-    "Slom socijalizma u Evropi",
-    "Zalivski rat"
+    "Slom socijalizma u Evropi"
   ]},
   {subj:"ess", items:[
-    "Tempo i dinamika spoljnotrgovinske razmene Srbije",
-    "Spoljni dug Srbije",
-    "Strane direktne investicije u Srbiji"
+    "Privatizacija i institucionalno okruženje",
+    "Ekonomsko stanje poljoprivrede od 1945. do 1957. godine",
+    "Seljačko gazdinstvo u agrarnoj politici i samoupravljanju od 1957. godine",
+    "Poljoprivreda u srednjoročnim planovima razvoja Jugoslavije od 1976. do 1985. godine",
+    "Tempo i dinamika spoljnotrgovinske razmene Srbije"
   ]},
   {subj:"ibo", items:[
-    "Rumunija u međuratnom periodu",
-    "Bugarska u međuratnom periodu"
+    "Albanija pod Ahmedom Zoguom",
+    "Britanija i pokreti otpora na Balkanu tokom Drugog svetskog rata",
+    "Rumunija u međuratnom periodu"
   ]},
   {subj:"spt", items:[
-    "Izvori građanskih vrlina",
-    "Obrazovanje za građanske vrline",
-    "Kosmopolitansko građanstvo",
-    "Multikulturalna kritika „građanstva kao prava\""
+    "Modeli multikulturalizma: nacionalne manjine",
+    "Liberalizam i problem kolektivne deliberacije izvan politike",
+    "Politički liberalizam: zajedničke vrednosti, solidarnost, legitimitet",
+    "Liberalni nacionalizam"
   ]}
 ]},
 {date:"13. septembar", note:"🔵 SAMO ENGLESKI JEZIK 2 — celodnevni finalni pregled OBE skripte pred kolokvijum. Ne uči se ESS, ni IBO, ni SPT.", review:{subj:"eng", label:"Kompletan pregled: cela skripta Unit 7 & 8 (gramatika + vokabular) + drugo čitanje tekstova + rešavanje svih vežbi iz zbirke (Verzije A–F, kondicionali, reported speech)"}},
 {date:"14. septembar", examFlag:"KOLOKVIJUM — Engleski jezik 2", examCheck:"Izašla sam na kolokvijum — Engleski jezik 2", note:"🚨 poslednji dan novog gradiva iz SPI", groups:[
   {subj:"spi", items:[
+    "Zalivski rat",
     "Daleki istok 90-ih godina",
     "Stanje u Evropi 90-ih godina",
     "Rusija za vreme Borisa Jeljcina",
     "Bliski istok 90-ih godina"
   ]},
   {subj:"ess", items:[
+    "Spoljni dug Srbije",
+    "Strane direktne investicije u Srbiji",
     "Međunarodne ekonomske integracije - primer CEFTA-e",
-    "Merenje nivoa razvijenosti",
-    "Dinamika razvoja industrije u Srbiji - zaposlenost i investicije u industriji"
+    "Merenje nivoa razvijenosti"
   ]},
-  {subj:"ibo", groupNote:"nadoknada, 4 teme", items:[
+  {subj:"ibo", items:[
+    "Bugarska u međuratnom periodu",
     "Balkanska multilateralna saradnja između dva svetska rata",
-    "Francuski i italijanski sistem saveza na Balkanu između dva svetska rata i Mala antanta",
-    "Uticaj fašizma i nacizma na Balkanu tridesetih godina XX veka",
-    "Prodor Musolinija i Hitlera na Balkan 1939-1941."
+    "Francuski i italijanski sistem saveza na Balkanu između dva svetska rata i Mala antanta"
   ]},
   {subj:"spt", items:[
-    "Politika preraspodele i politika priznanja",
-    "Komunitarni i liberalni multikulturalizam",
-    "Grupno-diferencirana prava",
-    "Multikulturalizam i izgradnja nacije"
+    "Nacionalizam i kosmopolitizam",
+    "Modeli multikulturalizma: imigrantske grupe",
+    "Vrline demokratskih građana",
+    "Javna razloženost: agregativna i deliberativna demokratija"
   ]}
 ]},
 {date:"15. septembar", note:"🟢 SAMO SAVREMENA POLITIČKA ISTORIJA — celodnevno ponavljanje svih 45 pitanja. Ne uči se ništa drugo.", review:{subj:"spi", label:"Ponovljeno svih 45 pitanja"}},
 {date:"16. septembar", examFlag:"ISPIT — Savremena politička istorija", examCheck:"Izašla sam na ispit — Savremena politička istorija", note:"🚨 poslednji dan novog gradiva iz ESS", groups:[
   {subj:"ess", doneNote:"✅ Prvi prolaz ESS završen", items:[
+    "Dinamika razvoja industrije u Srbiji - zaposlenost i investicije u industriji",
     "Efekti privatizacije u Srbiji i industrija",
     "Restrukturiranje javnih preduzeća",
     "Koncept privatizacije javnih preduzeća"
   ]},
   {subj:"ibo", items:[
-    "Pokreti otpora na Balkanu tokom Drugog svetskog rata",
-    "Uzroci i posledice sporazuma Staljina i Čerčila o podeli interesnih sfera na Balkanu posle Drugog svetskog rata"
+    "Uticaj fašizma i nacizma na Balkanu tridesetih godina XX veka",
+    "Prodor Musolinija i Hitlera na Balkan 1939-1941.",
+    "Pokreti otpora na Balkanu tokom Drugog svetskog rata"
   ]},
   {subj:"spt", items:[
-    "Javno i privatno: država i civilno društvo",
-    "Javno i privatno: lično i društveno",
-    "Etika brige i etika pravde: moralne sposobnosti i rasuđivanje"
+    "Građanski republikanizam",
+    "Liberalni republikanizam i instrumentalne vrline",
+    "Polna jednakost i polna diskriminacija",
+    "Izvori građanskih vrlina"
   ]}
 ]},
 {date:"17. septembar", note:"🚨 poslednji dan novog gradiva iz IBO. Plus: dodatni dan za ESS — aktivno ponavljanje, ne samo prelistavanje (ESS nije lak predmet).", groups:[
@@ -559,13 +524,15 @@ const DAYS = [
     "Izdvoji i ponovo pregledaj teme koje ti nisu bile jasne iz prve"
   ]},
   {subj:"ibo", doneNote:"✅ Prvi prolaz IBO završen", items:[
+    "Uzroci i posledice sporazuma Staljina i Čerčila o podeli interesnih sfera na Balkanu posle Drugog svetskog rata",
     "Mirovni sporazumi i početak hladnoratovskih podela interesnih sfera na Balkanu nakon Drugog svetskog rata",
     "Građanski rat u Grčkoj 1945-1949."
   ]},
   {subj:"spt", items:[
-    "Etika brige i etika pravde: univerzalnost vs. očuvanje odnosa",
-    "Etika brige i etika pravde: čovečanstvo vs. individualnost",
-    "Etika brige i etika pravde: prava i odgovornosti"
+    "Obrazovanje za građanske vrline",
+    "Kosmopolitansko građanstvo",
+    "Multikulturalna kritika „građanstva kao prava\"",
+    "Politika preraspodele i politika priznanja"
   ]}
 ]},
 {date:"18. septembar", note:"🔴 GLAVNI FOKUS: EKONOMSKI SISTEM SRBIJE — celodnevno ponavljanje svih 40 tema. Plus: IBO dobija lagano prelistavanje (~15 min), da dan ne ostane mrtav za njega. Ne uči se SPT. Ne uči se novo gradivo.", groups:[
@@ -578,35 +545,44 @@ const DAYS = [
     "Ponavljanje svih 31 pitanja"
   ]},
   {subj:"spt", items:[
-    "Izbori i demokratija: Šmitova kritika",
-    "Javnost i demokratija (Lipman)",
-    "Problem legitimnosti u parlamentarnim demokratijama"
+    "Komunitarni i liberalni multikulturalizam",
+    "Grupno-diferencirana prava",
+    "Multikulturalizam i izgradnja nacije",
+    "Javno i privatno: država i civilno društvo",
+    "Javno i privatno: lično i društveno"
   ]}
 ]},
 {date:"20. septembar", note:"🟠 SAMO ISTORIJA BALKANSKIH ODNOSA — celodnevno ponavljanje svih 31 pitanja. Ne uči se SPT. Ne uči se novo gradivo.", review:{subj:"ibo", label:"Ponovljeno svih 31 pitanje"}},
 {date:"21. septembar", examFlag:"ISPIT — Istorija balkanskih odnosa", examCheck:"Izašla sam na ispit — Istorija balkanskih odnosa", groups:[
   {subj:"spt", items:[
+    "Etika brige i etika pravde: moralne sposobnosti i rasuđivanje",
+    "Etika brige i etika pravde: univerzalnost vs. očuvanje odnosa",
+    "Etika brige i etika pravde: čovečanstvo vs. individualnost",
+    "Etika brige i etika pravde: prava i odgovornosti",
+    "Izbori i demokratija: Šmitova kritika"
+  ]}
+]},
+{date:"22. septembar", groups:[
+  {subj:"spt", items:[
+    "Javnost i demokratija (Lipman)",
+    "Problem legitimnosti u parlamentarnim demokratijama",
     "Demokratija kao forma i suština (Marks)",
     "Marksov odnos prema izborima i demokratiji",
     "Politička forma komune"
   ]}
 ]},
-{date:"22. septembar", groups:[
+{date:"23. septembar", groups:[
   {subj:"spt", items:[
     "Marksizam i demokratija",
     "Centralističke i anarhističke težnje unutar demokratije",
-    "Napeti odnos kapitalizma i demokratije (Laski)"
-  ]}
-]},
-{date:"23. septembar", groups:[
-  {subj:"spt", items:[
+    "Napeti odnos kapitalizma i demokratije (Laski)",
     "Normativna privlačnost i kriza demokratije: Kelzen i Lipman",
-    "Demokratski elitizam kao revizija pojma demokratije",
-    "Realistički pojam demokratije"
+    "Demokratski elitizam kao revizija pojma demokratije"
   ]}
 ]},
 {date:"24. septembar", note:"🚨 Poslednji dan novog gradiva iz SPT", groups:[
   {subj:"spt", doneNote:"✅ Prvi prolaz svih 64 pitanja SPT završen", items:[
+    "Realistički pojam demokratije",
     "Trijumf demokratije i postdemokratija",
     "Postdemokratija kao dijagnoza stanja realne demokratije",
     "Postdemokratija kao otklon od realne demokratije"
@@ -618,7 +594,7 @@ const DAYS = [
 
 let progress = {};
 let actualMin = {};
-let itemComments = {};
+let groupComments = {};
 let itemIndex = []; // {id, subj, text, planned}
 let storageOk = true;
 let openDays = new Set();
@@ -636,9 +612,13 @@ function buildIndex(){
       itemIndex.push({id:`d${di}-review`, subj:day.review.subj, text:day.review.label, planned:estimateMinutes(day.review.label, 6)});
     }
     if(day.examCheck){
-      itemIndex.push({id:`d${di}-examcheck`, subj:null, text:day.examCheck, planned:null});
+      itemIndex.push({id:`d${di}-examcheck`, subj:null, text:day.examCheck, planned:null, isExamCheck:true, dayIndex:di});
     }
   });
+}
+
+function examAnswered(di){
+  return !!(progress[`d${di}-examcheck-yes`] || progress[`d${di}-examcheck-no`]);
 }
 
 function render(){
@@ -662,7 +642,7 @@ function render(){
     }
     if(day.examCheck){
       dayTotal++;
-      if(progress[`d${di}-examcheck`]) dayChecked++;
+      if(examAnswered(di)) dayChecked++;
     }
 
     const header = document.createElement('div');
@@ -682,10 +662,16 @@ function render(){
     body.className = 'day-body';
 
     if(day.examCheck){
-      const id = `d${di}-examcheck`;
+      const idYes = `d${di}-examcheck-yes`;
+      const idNo = `d${di}-examcheck-no`;
+      const textYes = day.examCheck;
+      const textNo = day.examCheck.replace('Izašla sam', 'Nisam izašla');
       const ec = document.createElement('div');
       ec.className = 'examcheck-block';
-      ec.innerHTML = `<label class="item"><input type="checkbox" data-id="${id}" ${progress[id]?'checked':''}/><span class="txt">${day.examCheck}</span></label>`;
+      ec.innerHTML = `
+        <label class="item"><input type="checkbox" data-id="${idYes}" data-examcheck-pair="${idNo}" ${progress[idYes]?'checked':''}/><span class="txt">${textYes}</span></label>
+        <label class="item"><input type="checkbox" data-id="${idNo}" data-examcheck-pair="${idYes}" ${progress[idNo]?'checked':''}/><span class="txt">${textNo}</span></label>
+      `;
       body.appendChild(ec);
     }
 
@@ -708,7 +694,7 @@ function render(){
           const planned = getPlanned(g.subj, text);
           const lab = document.createElement('label');
           lab.className = 'item';
-          lab.innerHTML = `<input type="checkbox" data-id="${id}" ${progress[id]?'checked':''}/><span class="txt">${text} <span class="planned-min">(~${planned} min)</span></span>`;
+          lab.innerHTML = `<input type="checkbox" data-id="${id}" ${progress[id]?'checked':''}/><span class="txt">${text}</span>`;
           grp.appendChild(lab);
 
           const info = diffInfo(planned, actualMin[id]);
@@ -716,19 +702,12 @@ function render(){
           const actualRow = document.createElement('div');
           actualRow.className = 'actual-row';
           actualRow.innerHTML = `
-            <span>Potrošeno vremena:</span>
+            <span class="planned-min">Planirano vreme: ${planned} min</span>
+            <span>Potrošeno vreme:</span>
             <input type="number" min="0" placeholder="min" data-actual-id="${id}" value="${actualMin[id] !== undefined ? actualMin[id] : ''}">
             ${info ? `<span class="diff-badge ${info.cls}">${info.text}</span><span class="roast ${info.cls}">${cmt}</span>` : ''}
           `;
           grp.appendChild(actualRow);
-
-          const commentRow = document.createElement('div');
-          commentRow.className = 'comment-row';
-          commentRow.innerHTML = `
-            <textarea class="comment-input" placeholder="komentar (opciono)" data-comment-id="${id}">${itemComments[id] || ''}</textarea>
-            ${itemComments[id] ? `<div class="comment-reply">${pickComment(commentReplies, id+':'+itemComments[id])}</div>` : ''}
-          `;
-          grp.appendChild(commentRow);
         });
         body.appendChild(grp);
         if(g.doneNote){
@@ -736,6 +715,16 @@ function render(){
           n.className = 'note done';
           n.textContent = g.doneNote;
           body.appendChild(n);
+        }
+        {
+          const cid = `d${di}-g${gi}`;
+          const commentRow = document.createElement('div');
+          commentRow.className = 'comment-row';
+          commentRow.innerHTML = `
+            <textarea class="comment-input" placeholder="komentar" data-comment-group="${cid}">${groupComments[cid] || ''}</textarea>
+            ${groupComments[cid] ? `<div class="comment-reply">${pickComment(commentReplies, cid+':'+groupComments[cid])}</div>` : ''}
+          `;
+          body.appendChild(commentRow);
         }
       });
     }
@@ -746,28 +735,30 @@ function render(){
       const planned = estimateMinutes(day.review.label, 6);
       const rb = document.createElement('div');
       rb.className = 'review-block';
-      rb.innerHTML = `<label class="item"><input type="checkbox" data-id="${id}" ${progress[id]?'checked':''}/><span class="txt" style="color:${s.color}">${day.review.label} <span class="planned-min">(~${planned} min)</span></span></label>`;
+      rb.innerHTML = `<label class="item"><input type="checkbox" data-id="${id}" ${progress[id]?'checked':''}/><span class="txt" style="color:${s.color}">${day.review.label}</span></label>`;
 
       const info = diffInfo(planned, actualMin[id]);
       const cmt = info ? itemComment(info.cls, id+':'+actualMin[id]) : '';
       const actualRow = document.createElement('div');
       actualRow.className = 'actual-row';
       actualRow.innerHTML = `
-        <span>Potrošeno vremena:</span>
+        <span class="planned-min">Planirano vreme: ${planned} min</span>
+        <span>Potrošeno vreme:</span>
         <input type="number" min="0" placeholder="min" data-actual-id="${id}" value="${actualMin[id] !== undefined ? actualMin[id] : ''}">
         ${info ? `<span class="diff-badge ${info.cls}">${info.text}</span><span class="roast ${info.cls}">${cmt}</span>` : ''}
       `;
       rb.appendChild(actualRow);
 
+      body.appendChild(rb);
+
+      const rcid = `d${di}-review`;
       const commentRow = document.createElement('div');
       commentRow.className = 'comment-row';
       commentRow.innerHTML = `
-        <textarea class="comment-input" placeholder="komentar (opciono)" data-comment-id="${id}">${itemComments[id] || ''}</textarea>
-        ${itemComments[id] ? `<div class="comment-reply">${pickComment(commentReplies, id+':'+itemComments[id])}</div>` : ''}
+        <textarea class="comment-input" placeholder="komentar" data-comment-group="${rcid}">${groupComments[rcid] || ''}</textarea>
+        ${groupComments[rcid] ? `<div class="comment-reply">${pickComment(commentReplies, rcid+':'+groupComments[rcid])}</div>` : ''}
       `;
-      rb.appendChild(commentRow);
-
-      body.appendChild(rb);
+      body.appendChild(commentRow);
     }
 
     dayEl.appendChild(header);
@@ -779,6 +770,8 @@ function render(){
     cb.addEventListener('change', async (e)=>{
       const id = e.target.dataset.id;
       progress[id] = e.target.checked;
+      const pairId = e.target.dataset.examcheckPair;
+      if(pairId && e.target.checked) progress[pairId] = false;
       trackOpenState();
       saveProgress();
       render();
@@ -803,14 +796,14 @@ function render(){
     });
   });
 
-  container.querySelectorAll('textarea[data-comment-id]').forEach(ta=>{
+  container.querySelectorAll('textarea[data-comment-group]').forEach(ta=>{
     ta.addEventListener('click', e=>e.stopPropagation());
     ta.addEventListener('change', (e)=>{
       e.stopPropagation();
-      const id = e.target.dataset.commentId;
+      const cid = e.target.dataset.commentGroup;
       const v = e.target.value;
-      if(v && v.trim() !== '') itemComments[id] = v;
-      else delete itemComments[id];
+      if(v && v.trim() !== '') groupComments[cid] = v;
+      else delete groupComments[cid];
       trackOpenState();
       saveProgress();
       render();
@@ -840,7 +833,7 @@ document.addEventListener('click', (e)=>{
 
 function updateOverall(){
   const total = itemIndex.length;
-  const checked = itemIndex.filter(it=>progress[it.id]).length;
+  const checked = itemIndex.filter(it=> it.isExamCheck ? examAnswered(it.dayIndex) : progress[it.id]).length;
   const pct = total ? Math.round((checked/total)*100) : 0;
   document.getElementById('overallPct').textContent = pct + '%';
   document.getElementById('overallBar').style.width = pct + '%';
@@ -919,26 +912,26 @@ function loadProgress(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
     const data = raw ? JSON.parse(raw) : {};
-    if(data && (data.progress || data.actualMin || data.itemComments)){
+    if(data && (data.progress || data.actualMin || data.groupComments || data.dayComments || data.itemComments)){
       progress = data.progress || {};
       actualMin = data.actualMin || {};
-      itemComments = data.itemComments || {};
+      groupComments = data.groupComments || {};
     } else {
       // stari format (samo checkbox-ovi, pre uvođenja praćenja vremena)
       progress = data || {};
       actualMin = {};
-      itemComments = {};
+      groupComments = {};
     }
   }catch(err){
     progress = {};
     actualMin = {};
-    itemComments = {};
+    groupComments = {};
   }
 }
 
 function saveProgress(){
   try{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({progress, actualMin, itemComments}));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({progress, actualMin, groupComments}));
     if(!storageOk){
       storageOk = true;
       showStorageWarning(false);
